@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Uploader</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: rgba(233, 233, 233, 0.884);
+        font-size: 1.4rem;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      .container {
+        width: 200px;
+        height: 100px;
+        margin: 4rem auto;
+        background-color: rgba(235, 235, 235, 0.932);
+        padding: 30px;
+        box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2), -4px -4px 6px #fff;
+      }
+
+      .form {
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .cursor {
+        cursor: pointer;
+      }
+
+      .cursor > input {
+        display: none;
+      }
+
+      .submit {
+        outline-style: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      .container-2 {
+        width: 240px;
+        margin: 2rem auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form
+        action="/uploadImage"
+        method="POST"
+        enctype="multipart/form-data"
+        class="form"
+      >
+        <label class="cursor">
+          <input type="file" name="file" required />
+          <span>⬆️</span>
+        </label>
+        <input class="submit" type="submit" value="Upload" />
+      </form>
+    </div>
+    <div class="container-2">
+      <div style="text-align: center">👆</div>
+      png, jpeg and gif files are allowed to upload
+    </div>
+  </body>
+</html>
