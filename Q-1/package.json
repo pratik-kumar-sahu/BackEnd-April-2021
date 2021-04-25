@@ -1,0 +1,22 @@
+{
+  "name": "q-1",
+  "version": "1.0.0",
+  "description": "A simpple server based signup form",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pratik-sahu-au13/BackEnd-April-2021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pratik-sahu-au13/BackEnd-April-2021/issues"
+  },
+  "homepage": "https://github.com/pratik-sahu-au13/BackEnd-April-2021#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
