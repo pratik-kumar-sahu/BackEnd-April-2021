@@ -1,0 +1,15 @@
+{
+  "name": "q-4",
+  "version": "1.0.0",
+  "description": "RESTfull API and CRUD",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.5"
+  }
+}
