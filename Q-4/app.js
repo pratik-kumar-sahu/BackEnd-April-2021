@@ -19,42 +19,80 @@ mongoose
   .then(() => console.log("Movies DB connected"))
   .catch((err) => console.log("Error!!", err.message));
 
-app.get("/movies", (req, res) => {
-  res.send("Movies route");
+app.get("/", (req, res) => {
+  res.send({
+    moviesApi: "/movies",
+    directorsApi: "/directors",
+    createMovieApi: "/createMovie",
+  });
 });
 
-app.get("/director", (req, res) => {
-  res.send("Directors route");
+app.get("/movies", async (req, res) => {
+  try {
+    const movies = await Movie.find().populate("director", "-_id -__v -movies");
+    // console.log(movies);
+    if (movies) {
+      res.status(200).json({
+        success: true,
+        data: {
+          movies,
+        },
+      });
+    } else {
+      res.status(204).json({
+        success: false,
+        message: "No data available 🥴",
+      });
+    }
+  } catch (err) {}
+});
+
+app.get("/directors", async (req, res) => {
+  try {
+    const directors = await Director.find().populate(
+      "movies",
+      "title rating year -_id"
+    );
+    if (directors) {
+      res.status(200).json({
+        success: true,
+        data: {
+          directors,
+        },
+      });
+    } else {
+      res.status(204).json({
+        success: false,
+        message: "No data available 🥴",
+      });
+    }
+  } catch (err) {}
 });
 
 app.post("/createMovie", async (req, res) => {
   try {
-    let director = await Director.findOne({
+    // console.log(req.body);
+    let findDirector = await Director.findOne({
       name: req.body.director,
     });
 
-    if (!director) {
-      director = new Director({
+    if (!findDirector) {
+      findDirector = new Director({
         name: req.body.director,
       });
-      await director.save();
+      await findDirector.save();
     }
 
-    console.log(director);
-    const movie = await Movie.create({ ...req.body, director });
+    // console.log(findDirector);
+    const directorName = findDirector.name;
+    const movie = await Movie.create({
+      ...req.body,
+      director: findDirector,
+    });
 
-    director.movies.push(movie);
-    await director.save();
+    findDirector.movies.push(movie);
+    await findDirector.save();
 
-    res.send("success");
-  } catch (err) {
-    console.log(err.message);
-  }
-});
-
-app.post("/createDirector", async (req, res) => {
-  try {
-    await Director.create(req.body);
     res.send("success");
   } catch (err) {
     console.log(err.message);
