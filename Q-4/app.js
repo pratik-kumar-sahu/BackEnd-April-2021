@@ -99,6 +99,35 @@ app.post("/createMovie", async (req, res) => {
   }
 });
 
+app.put("/createMovie/:id", async (req, res) => {
+  try {
+    const movie = await Movie.findByIdAndUpdate(req.params.id, {
+      title: req.body.title,
+      rating: req.body.rating,
+      year: req.body.year,
+    });
+    res.json({
+      status: "updated movie",
+      data: {
+        updatedMovie: movie,
+      },
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+app.delete("/createMovie", async (req, res) => {
+  const movie = await Movie.findOne({ title: req.body.title });
+  movie.remove();
+  res.json({
+    status: "deleted",
+    data: {
+      deletedMovie: movie,
+    },
+  });
+});
+
 const PORT = 4002;
 app.listen(PORT, () => {
   console.log(`Server running at localhost:${PORT}`);
