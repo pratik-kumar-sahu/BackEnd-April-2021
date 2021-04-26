@@ -21,9 +21,10 @@ mongoose
 
 app.get("/", (req, res) => {
   res.send({
-    moviesApi: "/movies",
-    directorsApi: "/directors",
-    createMovieApi: "/createMovie",
+    getMoviesApi: "/movies",
+    getDirectorsApi: "/directors",
+    createAndDeleteMovieApi: "/createMovie",
+    updateMovieApi: "/createMovie/:id",
   });
 });
 
